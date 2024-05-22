@@ -21,7 +21,8 @@ const supplierSchema = new Schema({
     },
     supplier_panCard: {
         type: String,
-        required: true
+        required: true,
+        uppercase: true
     },
     supplier_companyName: {
         type: String,

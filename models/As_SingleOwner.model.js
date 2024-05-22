@@ -5,55 +5,70 @@ const bcrypt = require('bcrypt');
 const { Schema } = mongoose;
 
 const singleOwnerSchema = new Schema({
-    sOwner_fullName: {
+    singleOwner_fullName: {
         type: String,
         required: true
     },
-    sOwner_email: {
+    singleOwner_email: {
         type: String,
         required: true,
         lowercase: true
     },
-    sOwner_AdharNumber: {
+    singleOwner_AdharNumber: {
         type: Number,
         required: true
     },
-    sOwner_PanCard: {
+    singleOwner_PanCard: {
+        type: String,
+        required: true,
+        uppercase: true
+    },
+    singleOwner_DriverLicense: {
         type: String,
         required: true
     },
-    sOwner_DriverLicense: {
+    singleOwner_RC_Book: {
         type: String,
         required: true
     },
-    sOwner_RC_Book: {
-        type: String,
-        required: true
-    },
-    sOwner_Insurance: {
+    singleOwner_Insurance: {
         type: Number,
         required: true
     },
-    sOwner_Password: {
+    singleOwner_Password: {
         type: String,
         required: true
     },
-    sOwner_ConfirmPassword: {
+    singleOwner_NumberPlate:{
         type: String,
         required: true
     },
+    singleOwner_Id: {
+        type: Number,
+        required: true
+    }
 });
-singleOwnerSchema.pre('save', async function(){
-    try{
+singleOwnerSchema.pre('save', async function () {
+    try {
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(this.sOwner_Password, salt);
-        this.sOwner_Password = hashedPassword;
-        this.sOwner_ConfirmPassword = hashedPassword;
+        const hashedPassword = await bcrypt.hash(this.singleOwner_Password, salt);
+        this.singleOwner_Password = hashedPassword;
+    } catch (err) {
+        console.log(err);
+    }
+});
+singleOwnerSchema.methods.comparePassword = async function (password){
+    try{
+        console.log('Recievdpassword:', password);
+        console.log('storedpassword:', this.singleOwner_Password);
+        const isMatch = await bcrypt.compare(password, this.singleOwner_Password);
+        console.log('isMatch:', isMatch);
+        return isMatch;
     }
     catch(err){
         console.log(err);
     }
-} );
+}
 
 const singleOwnerModel = mongoose.model('SingleOwner', singleOwnerSchema);
 module.exports = singleOwnerModel;

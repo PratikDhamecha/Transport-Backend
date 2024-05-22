@@ -69,5 +69,5 @@ class supplierService {
     return resData;
   }
 }
-
+  
 module.exports = supplierService;
