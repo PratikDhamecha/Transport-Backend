@@ -31,8 +31,12 @@ const companySchema = new Schema({
         type:String,
         required: false
     },
-    company_Id:{
-        type:Number,
+    categoryComapny_Id:{
+        type: String,
+        required: false
+    },
+    truck_Details:{
+        type: [String],
         required: false
     }
 });

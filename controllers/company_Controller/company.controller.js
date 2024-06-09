@@ -28,12 +28,22 @@ exports.getAllCompany = async (req,res,next) => {
         next(err);
     }
 }
+exports.getCompanyById = async (req,res,next) => {
+    try{
+        const companyId = req.params.companyId;
+        let companyData = await companyService.getCompanyDataById(companyId);
+        res.json({status:true,data:companyData});
+    }catch(err){
+        next(err);
+    }
+
+}
 exports.updateCompany = async (req,res,next) => {
     try{
         const companyId = req.params.company_Id;
         const updatedCompanyData = req.body;
         console.log(updatedCompanyData);
-        let companyData = await companyService.updateCompanyData(companyId,updatedCompanyData);
+        let companyData = await companyService.updateCompanyData(companyId,updatedCompanyData,);
         res.json({status:true,data:companyData});
     }catch(err){
         next(err);

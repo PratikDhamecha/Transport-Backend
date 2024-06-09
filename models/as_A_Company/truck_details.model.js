@@ -28,10 +28,6 @@ const truckSchema = new Schema({
     company_Id:{
         type: Number,
         required: true
-    },
-    truck_Id:{
-        type: Number,
-        required: true
     }
 });
 

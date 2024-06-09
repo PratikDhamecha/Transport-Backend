@@ -15,7 +15,6 @@ class truckServices {
         truck_Insurance,
         truck_NumberPlate,
         company_Id,
-        truck_Id,
       } = trucks;
       const registerTruck = new truckModel({
         truck_Category,
@@ -23,8 +22,7 @@ class truckServices {
         truck_RcBook,
         truck_Insurance,
         truck_NumberPlate,
-        company_Id,
-        truck_Id: Math.floor(1000 + Math.random() * 9000),
+        company_Id
       });
       return registerTruck.save();
     } catch (err) {
@@ -39,7 +37,7 @@ class truckServices {
     }
   }
   static async getTruckData(truckId) {
-    const resData = await truckModel.find({ truckId: truckId });
+    const resData = await truckModel.find({ _id: truckId });
     return resData;
   }
   static async getAllTruckData() {
@@ -47,12 +45,12 @@ class truckServices {
     return resData;
   }
   static async deleteTruckData(truckId) {
-    const resData = await truckModel.findOneAndDelete({ truckId: truckId });
+    const resData = await truckModel.findOneAndDelete({ _id: truckId });
     return resData;
   }
   static async updateTruckData(truckId, updatedTruckData) {
     const resData = await truckModel.findOne(
-      { truckId: truckId },
+      { _id: truckId },
         updatedTruckData,
         { new: true }
     );

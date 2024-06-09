@@ -18,7 +18,7 @@ class singleOwnerService {
                 singleOwner_Insurance,
                 singleOwner_Password,
                 singleOwner_NumberPlate,
-                singleOwner_Id
+                categorySupplier_Id
             } = singleOwners;
             const registerSingleOwner = new singleOwnerModel({
                 singleOwner_fullName,
@@ -30,7 +30,7 @@ class singleOwnerService {
                 singleOwner_RC_Book,
                 singleOwner_Insurance,
                 singleOwner_Password,
-                singleOwner_Id: Math.floor(1000 + Math.random() * 9000)
+                categorySupplier_Id
             });
             return registerSingleOwner.save();
         } catch (err) {
@@ -49,7 +49,7 @@ class singleOwnerService {
         return jwt.sign(tokenData, secretKey, { expiresIn: expiresIn });
     }
     static async getSingleOwnerData(singleOwner_Id) {
-        const resData = await singleOwnerModel.find({ singleOwner_Id: singleOwner_Id });
+        const resData = await singleOwnerModel.find({ _id: singleOwner_Id });
         return resData;
     }
     static getAllSingleOwnerData() {
@@ -57,12 +57,12 @@ class singleOwnerService {
         return resData;
     }
     static async deleteSingleOwnerData(singleOwner_Id) {
-        const resData = await singleOwnerModel.findOneAndDelete({ singleOwner_Id: singleOwner_Id });
+        const resData = await singleOwnerModel.findOneAndDelete({ _id: singleOwner_Id });
         return resData;
     }
     static async updateSIngleOwnerData(singleOwner_Id, updateSingleOwnerData) {
         const resData = await singleOwnerModel.findOneAndUpdate(
-            { singleOwner_Id: singleOwner_Id }, 
+            { _id: singleOwner_Id }, 
             updateSingleOwnerData, 
             { new: true });
         return resData;

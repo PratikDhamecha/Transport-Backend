@@ -15,7 +15,8 @@ class companyService {
                 companyOwner_panCard,
                 companyOwner_GSTN,
                 companyOwner_password,
-                company_Id
+                categoryComapny_Id,
+                truck_Details
             } = companys;
             const registerCompany = new companyModel({
                 companyOwner_fullName,
@@ -24,7 +25,8 @@ class companyService {
                 companyOwner_panCard,
                 companyOwner_GSTN,
                 companyOwner_password,
-                company_Id: Math.floor(1000 + Math.random() * 9000),
+                categoryComapny_Id,
+                truck_Details
             });
             return registerCompany.save();
             }catch(err){
@@ -42,7 +44,11 @@ class companyService {
         return jwt.sign(tokenData,secretKey,{expiresIn: expiresIn});
     }
     static async getCompanyData(company_Id){
-        const resData = await companyModel.find({company_Id: company_Id});
+        const resData = await companyModel.find({_id: company_Id});
+        return resData;
+    }
+    static async getCompanyDataById(company_Id){
+        const resData = await companyModel.find({_id: company_Id});
         return resData;
     }
     static async getAllCompanyData(){
@@ -50,12 +56,12 @@ class companyService {
         return resData;
     }
     static async deleteCompanyData(company_Id){
-        const resData = await companyModel.findOneAndDelete({company_Id: company_Id});
+        const resData = await companyModel.findOneAndDelete({_id: company_Id});
         return resData;
     }
     static async updateCompanyData(company_Id,updatedCompanyData){
         const resData = await companyModel.findOneAndUpdate(
-            {company_Id: company_Id},
+            {_id: company_Id},
             updatedCompanyData,
             {new : true}
         );

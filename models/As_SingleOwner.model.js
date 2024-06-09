@@ -7,45 +7,46 @@ const { Schema } = mongoose;
 const singleOwnerSchema = new Schema({
     singleOwner_fullName: {
         type: String,
-        required: true
+        required: false
     },
     singleOwner_email: {
         type: String,
-        required: true,
+        required: false,
         lowercase: true
     },
     singleOwner_AdharNumber: {
         type: Number,
-        required: true
+        required: false
     },
     singleOwner_PanCard: {
         type: String,
-        required: true,
+        required: false,
         uppercase: true
     },
     singleOwner_DriverLicense: {
         type: String,
-        required: true
+        required: false
     },
     singleOwner_RC_Book: {
         type: String,
-        required: true
+        required: false
     },
     singleOwner_Insurance: {
         type: Number,
-        required: true
+        required: false
     },
     singleOwner_Password: {
         type: String,
-        required: true
+        required: false
     },
     singleOwner_NumberPlate:{
         type: String,
-        required: true
+        required: false
     },
-    singleOwner_Id: {
-        type: Number,
-        required: true
+    categorySupplier_Id: {
+        type: String,
+        required: false
+    
     }
 });
 singleOwnerSchema.pre('save', async function () {

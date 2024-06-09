@@ -22,6 +22,18 @@ exports.getSupplier = async (req, res, next) => {
         next(err);
     }
 }
+exports.getSupplierById = async (req, res, next) => {
+    try{
+        const supplierId = req.params.supplierId;
+        console.log(supplierId);
+        let supplierData = await supplierServices.getSupplierDataById(supplierId,);
+        res.json({status: true, data: supplierData});
+    }
+    catch(err){
+        next(err);
+    }
+
+}
 exports.updateSupplier = async (req,res,next) => {
     
     try{
@@ -68,7 +80,7 @@ exports.loginSupplier = async (req, res, next) => {
         if(!isMatch){
             return res.json({status: 101, message: "Invalid password"});
         }
-        let tokenData = { supplierId: supplier.supplier_Id, email: supplier.supplier_email };
+        let tokenData = { supplierId: supplier._id, email: supplier.supplier_email };
         const token = await supplierServices.generateToken(tokenData, process.env.SECRET_KEY, '1y');
         res.status(200).json({status: true, token: token});
     } catch(err){
@@ -76,5 +88,6 @@ exports.loginSupplier = async (req, res, next) => {
         res.status(500).json({status: false, message: "Internal Server Error"})
     }
 }
+
 
 module.exports = exports;

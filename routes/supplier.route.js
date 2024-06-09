@@ -7,7 +7,8 @@ const supplierModel = require('../models/supplier.model');
 
 router.post("/register", supplierController.registerSupplier);
 //router.post("/login",supplierController.loginSupplier);
-router.post("/getSupplier", supplierController.getSupplier);
+router.get("/getSupplier", supplierController.getSupplier);
+router.get("/getSupplierById/:supplierId", supplierController.getSupplierById);
 router.put("/updateSupplier/:supplierId",verifyToken,supplierController.updateSupplier);
 router.get("/getAllSupplier",supplierController.getAllSupplier);
 router.delete("/deleteSupplier/:supplierId",verifyToken,supplierController.deleteSupplier);

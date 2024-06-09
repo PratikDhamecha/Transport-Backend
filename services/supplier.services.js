@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const db = require("../config/db");
-const { deleteSupplier } = require("../controllers/supplier.controller");
 
 class supplierService {
   static async registerSupplier(suppliers) {
@@ -17,7 +16,7 @@ class supplierService {
         supplier_companyName,
         supplier_GSTIN,
         supplier_password,
-        supplier_Id,
+        categorySupplier_Id
       } = suppliers;
       const registerSupplier = new supplierModel({
         supplier_fullName,
@@ -27,7 +26,7 @@ class supplierService {
         supplier_companyName,
         supplier_GSTIN,
         supplier_password,
-        supplier_Id: Math.floor(1000 + Math.random() * 9000),
+        categorySupplier_Id
       });
       return await registerSupplier.save();
     } catch (err) {
@@ -44,25 +43,38 @@ class supplierService {
     }
   }
 
+  static async checkSupplierById(supplier_Id) {
+    try {
+      return await supplierModel.findOne({ _id: supplier_Id });
+    } catch (err) {
+      throw err;
+    }
+  }
+
   static async generateToken(tokenData, secretKey, expiresIn) {
     return jwt.sign(tokenData, secretKey, { expiresIn: expiresIn });
   }
 
-  static async getSupplierData(supplierId) {
-    const resData = await supplierModel.find({ supplier_id: supplierId });
+  static async getSupplierData(supplier_Id) {
+    const resData = await supplierModel.find({ _id: supplier_Id });
     return resData;
+  }
+  static async getSupplierDataById(supplier_Id) {
+    const resData = await supplierModel.findById({ _id: supplier_Id });
+    console.log(resData);
+    return resData;  
   }
   static async getAllSupplierData() {
     const resData = await supplierModel.find();
     return resData;
   }
   static async deleteSupplierData(supplier_Id){
-    const resData = await supplierModel.findOneAndDelete({supplier_Id:supplier_Id});
+    const resData = await supplierModel.findOneAndDelete({_id:supplier_Id});
     return resData;
   }
   static async updateSupplierData(supplierId, updatedSupplierData) {
     const resData = await supplierModel.findOneAndUpdate(
-      { supplier_Id: supplierId },
+      { _id: supplierId },
       updatedSupplierData,
       { new: true }
     );

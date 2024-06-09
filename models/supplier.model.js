@@ -8,37 +8,38 @@ const { Schema } = mongoose;
 const supplierSchema = new Schema({
     supplier_fullName: {
         type: String,
-        required: true
+        required: false
     },
     supplier_email: {
         type: String,
-        required: true,
+        required: false,
         lowercase: true
     }, 
     supplier_adharNumber: {
         type: Number,
-        required: true
+        required: false
     },
     supplier_panCard: {
         type: String,
-        required: true,
+        required: false,
         uppercase: true
     },
     supplier_companyName: {
         type: String,
-        required: true
+        required: false
     },
     supplier_GSTIN: {
         type: String,
-        required: true
+        required: false
     },
     supplier_password: {
         type: String,
-        required: true
+        required: false
     },
-    supplier_Id:{
-        type: Number,
-        required:true
+    categorySupplier_Id:{
+        type: String,
+        required: false
+    
     }
 });
 
