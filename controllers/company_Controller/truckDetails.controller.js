@@ -1,5 +1,5 @@
 const truckServices = require("../../services/as_a_company/truckDetails.services");
-const companyServices = require("../../services/as_a_company/companyDetails.services");
+const companyServices = require("../../services/as_a_company/company.services");
 require('dotenv').config();
 
 exports.registerTruck = async (req,res,next) => {

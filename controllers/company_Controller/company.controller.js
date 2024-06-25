@@ -1,4 +1,4 @@
-const companyService = require('../../services/as_a_company/company.service');
+const companyService = require('../../services/as_a_company/company.services');
 require('dotenv').config();
 
 exports.registerCompany = async (req,res,next) => {
