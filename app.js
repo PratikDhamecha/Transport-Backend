@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 
 
 const  supplierRouter  = require('./routes/supplier_route/supplier.route');
-const singleOwnerRouter = require('./routes/supplier_route/supplier.route')
+const singleOwnerRouter = require('./routes/singleOwner_route/singleOwner.route')
 const companyRouter = require('./routes/companyRoutes/company.route');
 const truckRouter = require('./routes/companyRoutes/truckDetails.route');
 const allLoginRouter = require('./routes/login_route/all_Login.route');

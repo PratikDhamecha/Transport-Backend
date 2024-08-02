@@ -1,10 +1,12 @@
 const companyService = require('../../services/as_a_company/company.services');
+const all_LoginService = require('../../services/login_service/allLogin.service');
 require('dotenv').config();
 
 exports.registerCompany = async (req,res,next) => {
     try{
         const company = req.body;
         const createdCompany = await companyService.registerCompany(company);
+        const createdLogin = await all_LoginService.registerLogin({login_email: createdCompany.companyOwner_email, login_password: createdCompany.companyOwner_password, category_Id: createdCompany.categoryComapny_Id, user_Id: createdCompany._id});
         res.json({status: true,success: "Company registered successfully",data: createdCompany});
     }catch(err){
         next(err);

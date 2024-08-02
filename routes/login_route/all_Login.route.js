@@ -6,6 +6,6 @@ const all_LoginModel = require('../../models/login_model/all_Login.model');
 
 router.post("/register", all_LoginController.registerLogin);
 router.post("/getLogin", all_LoginController.getLogin);
-router.post("/checlLoginAndGetCategory",all_LoginController.checlLoginAndGetCategory);
+router.post("/checkLoginAndGetCategory",all_LoginController.checlLoginAndGetCategory);
 
 module.exports = router;

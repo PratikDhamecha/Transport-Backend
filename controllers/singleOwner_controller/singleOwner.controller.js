@@ -1,12 +1,13 @@
 const singleOwnerService = require('../../services/singleOwner_Service/singleOwner.service');
+const all_LoginService = require('../login_controller/all_Login.controller');
 require('dotenv').config();
 
 exports.registerSingleOwner = async (req,res,next) =>{
     try{
         const singleOwner = req.body;
         const createdSingleOwner = await singleOwnerService.registerSingleOwner(singleOwner);
+        const createdLogin = await all_LoginService.registerLogin({login_email: createdSingleOwner.singleOwner_email, login_password: createdSingleOwner.singleOwner_Password, category_Id: createdSingleOwner.categorySingleOwner_Id, user_Id: createdSingleOwner._id});
         res.json({status: true, success: "Single Owner registered successfully", data: createdSingleOwner});
-
     }catch(err){
         next(err);
     }

@@ -43,7 +43,7 @@ const singleOwnerSchema = new Schema({
         type: String,
         required: false
     },
-    categorySupplier_Id: {
+    categorySingleOwner_Id: {
         type: String,
         required: false
     

@@ -1,11 +1,16 @@
+const all_LoginService = require('../../services/login_service/allLogin.service');
 const supplierServices = require('../../services/supplier_service/supplier.services');
 require('dotenv').config();
 
 exports.registerSupplier = async (req ,res,next) => {
     try{
+        console.log("enter in register");
         const suppliers = req.body;
         const createdSupplier = await supplierServices.registerSupplier(suppliers);
-        res.json({status: true, success: "supplier registered successfully", data: createdSupplier});
+        const createdLogin = await all_LoginService.registerLogin({login_email: createdSupplier.supplier_email, login_password: createdSupplier.supplier_password, category_Id: createdSupplier.categorySupplier_Id, user_Id: createdSupplier._id}); 
+        let tokenData = { supplierId: createdSupplier._id, email: createdSupplier.supplier_email };
+        const tokenSignUp = await supplierServices.generateToken(tokenData, process.env.SECRET_KEY, '1y');
+        res.json({status: true, success: "supplier registered successfully", data: createdSupplier,token: tokenSignUp});
     }
     catch (err) {
         next(err);

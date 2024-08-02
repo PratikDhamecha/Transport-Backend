@@ -65,10 +65,10 @@ class all_LoginService{
             throw err;
         }
     }
-    static async getCategoryID(category_Id){
-        const resData = await all_LoginModel.find({category_Id:category_Id});
-        return resData;
-    }
+    // static async getCategoryID(category_Id){
+    //     const resData = await all_LoginModel.find({category_Id:category_Id});
+    //     return resData;
+    // }
     static async getLoginData(user_Id){
         const resData = await all_LoginModel.find({user_Id:user_Id});
         return resData;

@@ -18,7 +18,7 @@ class singleOwnerService {
                 singleOwner_Insurance,
                 singleOwner_Password,
                 singleOwner_NumberPlate,
-                categorySupplier_Id
+                categorySingleOwner_Id
             } = singleOwners;
             const registerSingleOwner = new singleOwnerModel({
                 singleOwner_fullName,
@@ -30,7 +30,7 @@ class singleOwnerService {
                 singleOwner_RC_Book,
                 singleOwner_Insurance,
                 singleOwner_Password,
-                categorySupplier_Id
+                categorySingleOwner_Id
             });
             return registerSingleOwner.save();
         } catch (err) {
