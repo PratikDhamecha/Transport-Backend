@@ -7,7 +7,9 @@ exports.registerCompany = async (req,res,next) => {
         const company = req.body;
         const createdCompany = await companyService.registerCompany(company);
         const createdLogin = await all_LoginService.registerLogin({login_email: createdCompany.companyOwner_email, login_password: createdCompany.companyOwner_password, category_Id: createdCompany.categoryComapny_Id, user_Id: createdCompany._id});
-        res.json({status: true,success: "Company registered successfully",data: createdCompany});
+        let tokenData = { companyId: createdCompany._id, email: createdCompany.companyOwner_email };
+        const tokenSignUp = await companyService.generateToken(tokenData, process.env.SECRET_KEY, '1y');
+        res.json({status:true,success:"Company registered successfully",data:createdCompany,token:tokenSignUp});
     }catch(err){
         next(err);
     }
