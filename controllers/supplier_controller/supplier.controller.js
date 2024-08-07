@@ -7,6 +7,7 @@ exports.registerSupplier = async (req ,res,next) => {
         console.log("enter in register");
         const suppliers = req.body;
         const createdSupplier = await supplierServices.registerSupplier(suppliers);
+        console.log(createdSupplier);
         const createdLogin = await all_LoginService.registerLogin({login_email: createdSupplier.supplier_email, login_password: createdSupplier.supplier_password, category_Id: createdSupplier.categorySupplier_Id, user_Id: createdSupplier._id}); 
         let tokenData = { supplierId: createdSupplier._id, email: createdSupplier.supplier_email };
         const tokenSignUp = await supplierServices.generateToken(tokenData, process.env.SECRET_KEY, '1y');
