@@ -47,6 +47,7 @@ exports.updateSupplier = async (req,res,next) => {
         const updatedSupplierData = req.body;
         console.log(updatedSupplierData);
         let supplierData = await supplierServices.updateSupplierData(supplierId, updatedSupplierData);
+        console.log(supplierData);
         res.json({status: true, data: supplierData});
     }
     catch(err){

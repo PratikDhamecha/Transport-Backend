@@ -28,7 +28,9 @@ class supplierService {
         supplier_password,
         categorySupplier_Id
       });
+      
       return await registerSupplier.save();
+      
     } catch (err) {
       throw err;
       //console.log(err);
@@ -80,12 +82,20 @@ class supplierService {
     }
   }
   static async updateSupplierData(supplierId, updatedSupplierData) {
+    const id = await this.getSupplierDataById(supplierId);
+    console.log(id);
+    try{
     const resData = await supplierModel.findOneAndUpdate(
       { _id: supplierId },
       updatedSupplierData,
       { new: true }
     );
+    console.log(resData);
     return resData;
+  }
+  catch(err){
+    console.log(err);
+  }
   }
 }
   
