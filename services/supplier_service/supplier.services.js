@@ -16,7 +16,7 @@ class supplierService {
         supplier_companyName,
         supplier_GSTIN,
         supplier_password,
-        categorySupplier_Id
+        categorySupplier_Id,
       } = suppliers;
       const registerSupplier = new supplierModel({
         supplier_fullName,
@@ -26,11 +26,10 @@ class supplierService {
         supplier_companyName,
         supplier_GSTIN,
         supplier_password,
-        categorySupplier_Id
+        categorySupplier_Id,
       });
-      
-      return await registerSupplier.save();
-      
+      await registerSupplier.save();
+      return registerSupplier;
     } catch (err) {
       throw err;
       //console.log(err);
@@ -64,14 +63,14 @@ class supplierService {
   static async getSupplierDataById(supplier_Id) {
     const resData = await supplierModel.findById({ _id: supplier_Id });
     console.log(resData);
-    return resData;  
+    return resData;
   }
   static async getAllSupplierData() {
     const resData = await supplierModel.find();
     return resData;
   }
-  static async deleteSupplierData(supplier_Id){
-    const resData = await supplierModel.findOneAndDelete({_id:supplier_Id});
+  static async deleteSupplierData(supplier_Id) {
+    const resData = await supplierModel.findOneAndDelete({ _id: supplier_Id });
     return resData;
   }
   static async checkSupplierLogin(supplier_email) {
@@ -84,19 +83,18 @@ class supplierService {
   static async updateSupplierData(supplierId, updatedSupplierData) {
     const id = await this.getSupplierDataById(supplierId);
     console.log(id);
-    try{
-    const resData = await supplierModel.findOneAndUpdate(
-      { _id: supplierId },
-      updatedSupplierData,
-      { new: true }
-    );
-    console.log(resData);
-    return resData;
-  }
-  catch(err){
-    console.log(err);
-  }
+    try {
+      const resData = await supplierModel.findOneAndUpdate(
+        { _id: supplierId },
+        updatedSupplierData,
+        { new: true }
+      );
+      console.log(resData);
+      return resData;
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
-  
+
 module.exports = supplierService;
