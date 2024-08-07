@@ -1,5 +1,5 @@
-const singleOwnerService = require('../../services/singleOwner_Service/singleOwner.service');
-const all_LoginService = require('../login_controller/all_Login.controller');
+const singleOwnerService = require('../singleOwner_controller/singleOwner.service');
+const all_LoginService = require('../login_controller/all_Login.service');s
 require('dotenv').config();
 
 exports.registerSingleOwner = async (req,res,next) =>{

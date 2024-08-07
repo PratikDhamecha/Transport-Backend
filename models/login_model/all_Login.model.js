@@ -34,8 +34,8 @@ all_LoginSchema.methods.comparePassword = async function (password) {
       console.log('Recievdpassword:', password);
       console.log('storedpassword:', this.login_password);
       const isMatch = await bcrypt.compare(password, this.login_password);
-      return isMatch;
       console.log('isMatch:', isMatch);
+      return isMatch;
     }catch(err){
         throw err;
     }
