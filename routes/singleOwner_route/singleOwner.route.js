@@ -9,7 +9,7 @@ router.post("/getSingleOwner", singleOwnerController.getSingleOwner);
 router.put("/updateSingleOwner/:singleOwnerId",verifyToken,singleOwnerController.updateSingleOwner);
 router.get("/getAllSingleOwner",singleOwnerController.getAllSingleOwner);
 router.delete("/deleteSingleOwner/:singleOwnerId",verifyToken,singleOwnerController.deleteSingleOwner);
-
+router.get("/getSingleOwnerById/:singleOwnerId",singleOwnerController.getSingleOwnerById);
 // router.post("/login", async (req, res) => {
 //     try{
 //         const { email,password } = req.body;
