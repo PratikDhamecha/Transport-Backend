@@ -30,8 +30,9 @@ exports.getLogin = async (req,res,next) => {
     }
 }
 
-exports.checlLoginAndGetCategory = async (req,res,next) => {
+exports.checkLoginAndGetCategory = async (req,res,next) => {
     try{
+        console.log('req.body:',req.body);
         const { login_email,login_password } = req.body;
         const loginData = await loginService.checkLogin(login_email);
         if(!loginData){
