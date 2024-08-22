@@ -1,4 +1,4 @@
-const SingleOwnerTripModel = require('../../models/singleOwnerTrip.model');
+const SingleOwnerTripModel = require('../../models/singleowner/trip.model');
 const axios = require('axios');
 const mongoose = require('mongoose');
 const db = require('../../config/db');
@@ -51,10 +51,10 @@ class singleOwnerTripService{
         return resData;
     }
 
-    static async getCoordinates(starting_point,ending_point){
-        const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${starting_point[0]},${starting_point[1]};${ending_point[0]},${ending_point[1]}?geometries=geojson&access_token=${process.env.MAPBOX_API_KEY}`; 
-        
-    }
+    // static async getCoordinates(starting_point,ending_point){
+    //     const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${starting_point[0]},${starting_point[1]};${ending_point[0]},${ending_point[1]}?geometries=geojson&access_token=${process.env.MAPBOX_API_KEY}`; 
+    // }
+    
 
     
 }
