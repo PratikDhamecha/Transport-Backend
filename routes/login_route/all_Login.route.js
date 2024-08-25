@@ -5,7 +5,7 @@ const verifyToken = require('../../middleware/middleware');
 const all_LoginModel = require('../../models/login_model/all_Login.model');
 
 router.post("/register", all_LoginController.registerLogin);
-router.post("/getLogin", all_LoginController.getLogin);
+// router.post("/getLogin", all_LoginController.getLogin);
 router.get("/checkLoginAndGetCategory",all_LoginController.checkLoginAndGetCategory);
 
 module.exports = router;
