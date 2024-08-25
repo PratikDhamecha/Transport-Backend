@@ -44,15 +44,15 @@ exports.checkLoginAndGetCategory = async (req,res,next) => {
             return res.json({status: false, message: "password incorrect"});
         }
         console.log('loginData:',loginData);
-        if(loginData.category_Id == '6661accdbcc564c6dae76c7f'){
+        if(loginData.category_Id == "6661accdbcc564c6dae76c7f"){
             let supplierData = await supplierService.getSupplierDataById(loginData.user_Id);
             console.log(supplierData)
         }
-        else if(loginData.category_Id == '6661ade2bcc564c6dae76c81'){
+        else if(loginData.category_Id == "6661ade2bcc564c6dae76c81"){
             let singleOwnerData = await singleOwnerService.getSingleOwnerData(loginData.user_Id);
             console.log(singleOwnerData)
         }
-        else if(loginData.category_Id == '6661adf2bcc564c6dae76c83'){
+        else if(loginData.category_Id == "6661adf2bcc564c6dae76c83"){
             let companyData = await companyService.getCompanyDataById(loginData.user_Id);
             console.log(companyData)
         }
