@@ -38,7 +38,6 @@ exports.getSupplierById = async (req, res, next) => {
     catch(err){
         next(err);
     }
-
 }
 exports.updateSupplier = async (req,res,next) => {
     
