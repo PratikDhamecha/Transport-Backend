@@ -8,6 +8,7 @@ exports.registerSingleOwner = async (req,res,next) =>{
         const createdSingleOwner = await singleOwnerService.registerSingleOwner(singleOwner);
         const createdLogin = await all_LoginService.registerLogin({login_email: createdSingleOwner.singleOwner_email, login_password: createdSingleOwner.singleOwner_Password, category_Id: createdSingleOwner.categorySingleOwner_Id, user_Id: createdSingleOwner._id});
         let tokenData = {singleOwnerId:createdSingleOwner._id,singleOwner_email:createdSingleOwner.singleOwner_email,singleOwner_password:createdSingleOwner.singleOwner_Password,singleOwner_categoryId:createdSingleOwner.categorySingleOwner_Id};
+        console.log(tokenData);
         const tokenSignUp = await singleOwnerService.generateToken(tokenData, process.env.SECRET_KEY, '1y');
         res.json({status: true, success: "Single Owner registered successfully", data: createdSingleOwner, token: tokenSignUp});
     }catch(err){
