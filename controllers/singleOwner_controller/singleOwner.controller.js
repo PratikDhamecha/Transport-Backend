@@ -28,6 +28,7 @@ exports.getSingleOwner = async (req,res,next) =>{
 exports.getSingleOwnerById = async (req,res,next) =>{
     try{
         const singleOwnerId = req.params.singleOwnerId;
+        console.log(singleOwnerId);
         let singleOwnerData = await singleOwnerService.getSingleOwnerData(singleOwnerId);
         res.json({status: true, data: singleOwnerData});
     }catch(err) {
