@@ -54,7 +54,7 @@ exports.checkLoginAndGetCategory = async (req,res,next) => {
             console.log('categoryData:',categoryData);
         }
         else if(loginData.category_Id == "6661adf2bcc564c6dae76c83"){
-            categoryData = await singleOwnerController.getSingleOwnerById(loginData.user_Id);
+            categoryData = await singleOwnerService.getSingleOwnerData(loginData.user_Id);
             console.log('categoryData:',categoryData);
         }
         else if(loginData.category_Id == "6661ade2bcc564c6dae76c81"){
