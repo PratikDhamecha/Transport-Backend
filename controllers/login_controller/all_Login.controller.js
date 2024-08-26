@@ -50,7 +50,7 @@ exports.checkLoginAndGetCategory = async (req,res,next) => {
         const token = await loginService.generateToken(tokenData,process.env.SECRET_KEY,'1y');
         let categoryData;
         if(loginData.category_Id == "6661accdbcc564c6dae76c7f"){
-            categoryData = await supplierController.getSupplierById(loginData.user_Id);
+            categoryData = await supplierService.getSupplierDataById(loginData.user_Id);
             console.log('categoryData:',categoryData);
         }
         else if(loginData.category_Id == "6661adf2bcc564c6dae76c83"){
@@ -58,7 +58,7 @@ exports.checkLoginAndGetCategory = async (req,res,next) => {
             console.log('categoryData:',categoryData);
         }
         else if(loginData.category_Id == "6661ade2bcc564c6dae76c81"){
-            categoryData = await companyController.getCompanyById(loginData.user_Id);
+            categoryData = await companyService.getCompanyDataById(loginData.user_Id);
             console.log('categoryData:',categoryData);
         }
         return res.status(200).json({status:true,token: token,categoryData: categoryData});
