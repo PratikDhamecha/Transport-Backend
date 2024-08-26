@@ -32,7 +32,6 @@ exports.getLogin = async (req,res,next) => {
 
 exports.checkLoginAndGetCategory = async (req,res,next) => {
     try{
-        console.log('req.body:',req.body);
         const { login_email,login_password } = req.body;
         const loginData = await loginService.checkLogin(login_email);
         if(!loginData){
@@ -43,30 +42,28 @@ exports.checkLoginAndGetCategory = async (req,res,next) => {
         if(!isMatch){
             return res.json({status: false, message: "password incorrect"});
         }
-        console.log('loginData:',loginData);
-        if(loginData.category_Id == "6661accdbcc564c6dae76c7f"){
-            let supplierData = await supplierService.getSupplierDataById(loginData.user_Id);
-            console.log(supplierData)
-        }
-        else if(loginData.category_Id == "6661ade2bcc564c6dae76c81"){
-            let singleOwnerData = await singleOwnerService.getSingleOwnerData(loginData.user_Id);
-            console.log(singleOwnerData)
-        }
-        else if(loginData.category_Id == "6661adf2bcc564c6dae76c83"){
-            let companyData = await companyService.getCompanyDataById(loginData.user_Id);
-            console.log(companyData)
-        }
         let tokenData = {
-            category_id:loginData.category_Id,
-            user_id: loginData.user_Id,
+            login_email: loginData.login_email,
+            category_Id: loginData.category_Id,
+            user_Id: loginData.user_Id
         }
         const token = await loginService.generateToken(tokenData,process.env.SECRET_KEY,'1y');
-        return res.status(200).json({status:true,token:token});
+        let categoryData;
+        if(loginData.category_Id == "6661accdbcc564c6dae76c7f"){
+            categoryData = await supplierController.getSupplierById(loginData.user_Id);
+        }
+        else if(loginData.category_Id == "6661adf2bcc564c6dae76c83"){
+            categoryData = await singleOwnerController.getSingleOwnerById(loginData.user_Id);
+        }
+        else if(loginData.category_Id == "6661ade2bcc564c6dae76c81"){
+            categoryData = await companyController.getCompanyById(loginData.user_Id);
+        }
+        return res.status(200).json({status:true,token: token,categoryData: categoryData});
+        
+    } catch(err){
+        console.log(err);
+        return res.status(500).json({status: false, message: "Internal server error"});
     }
-    catch(err){
-        next(err);
-    }
-
 }
 
 // exports.checkLogin = async (req,res,next) => {
