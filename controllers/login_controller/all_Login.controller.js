@@ -51,12 +51,15 @@ exports.checkLoginAndGetCategory = async (req,res,next) => {
         let categoryData;
         if(loginData.category_Id == "6661accdbcc564c6dae76c7f"){
             categoryData = await supplierController.getSupplierById(loginData.user_Id);
+            console.log('categoryData:',categoryData);
         }
         else if(loginData.category_Id == "6661adf2bcc564c6dae76c83"){
             categoryData = await singleOwnerController.getSingleOwnerById(loginData.user_Id);
+            console.log('categoryData:',categoryData);
         }
         else if(loginData.category_Id == "6661ade2bcc564c6dae76c81"){
             categoryData = await companyController.getCompanyById(loginData.user_Id);
+            console.log('categoryData:',categoryData);
         }
         return res.status(200).json({status:true,token: token,categoryData: categoryData});
         
