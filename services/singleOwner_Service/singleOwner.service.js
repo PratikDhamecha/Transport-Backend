@@ -45,9 +45,9 @@ class singleOwnerService {
             throw err;
         }
     }
-    static async generateToken(tokenData, secretKey, expiresIn) {
-        return jwt.sign(tokenData, secretKey, { expiresIn: expiresIn });
-    }
+        static async generateToken(tokenData, secretKey, expiresIn) {
+            return jwt.sign(tokenData, secretKey, { expiresIn: expiresIn });
+        }
     static async getSingleOwnerData(singleOwner_Id) {
         const resData = await singleOwnerModel.find({ _id: singleOwner_Id });
         return resData;

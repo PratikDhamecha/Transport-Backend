@@ -1,6 +1,8 @@
 const SingleOwnerTripModel = require('../../models/singleowner/trip.model');
 const axios = require('axios');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const db = require('../../config/db');
 
 
@@ -15,6 +17,7 @@ class singleOwnerTripService{
                 trip_weight,
                 trip_cost,
                 trip_paymentDetails,
+                trip_shipperReciever
             } = trips;
             const registerTrip = new SingleOwnerTripModel({
                 trip_state,
@@ -23,6 +26,7 @@ class singleOwnerTripService{
                 trip_weight,
                 trip_cost,
                 trip_paymentDetails,
+                trip_shipperReciever
             });
             return registerTrip.save();
         }
@@ -30,6 +34,10 @@ class singleOwnerTripService{
             throw err;
         }
     }
+
+    static async generateToken(tokenData, secretKey, expiresIn) {
+            return jwt.sign(tokenData, secretKey, { expiresIn: expiresIn });
+        }
 
     static async getTripData(trip_Id){
         const resData = await SingleOwnerTripModel.find({_id:trip_Id});
@@ -50,6 +58,33 @@ class singleOwnerTripService{
         const resData = await SingleOwnerTripModel.findOneAndUpdate({_id:trip_Id},trips,{new:true});
         return resData;
     }
+
+    static async updateTripStatus(trip_Id, newStatus){
+        const resData = await SingleOwnerTripModel.findOneAndUpdate(
+            { _id: trip_Id},
+            { status: newStatus },
+            { new: true}
+        );  
+        return resData
+    }
+
+    static async getShipperReciever(trip_Id) {
+        const resData = await SingleOwnerTripModel.findById(trip_Id, 'trip_shipperReciever');
+        return resData;
+    }
+
+    //this function is for the compnay which owns multiple trucks
+    // const assignVehicle = async (tripId, vehicleId) => {
+    //   try {
+    //       return await Trip.findByIdAndUpdate(
+    //           tripId, 
+    //           { vehicle: vehicleId },  // Updating the vehicle field
+    //           { new: true } // Return the updated trip
+    //       );
+    //   } catch (error) {
+    //       throw new Error(`Error assigning vehicle: ${error.message}`);
+    //   }
+    // };
 
     // static async getCoordinates(starting_point,ending_point){
     //     const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${starting_point[0]},${starting_point[1]};${ending_point[0]},${ending_point[1]}?geometries=geojson&access_token=${process.env.MAPBOX_API_KEY}`; 

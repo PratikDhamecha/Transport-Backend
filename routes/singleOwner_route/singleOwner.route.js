@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const singleOwnerController = require('../../controllers/singleOwner_controller/singleOwner.controller');
 const verifyToken = require('../../middleware/middleware');
-const singleOwnerModel = require('../../models/singleowner/As_SingleOwner.model');
+//const singleOwnerModel = require('../../models/singleowner/As_SingleOwner.model');
 
 router.post("/register", singleOwnerController.registerSingleOwner);
 router.post("/getSingleOwner", singleOwnerController.getSingleOwner);

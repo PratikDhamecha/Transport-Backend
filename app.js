@@ -12,6 +12,7 @@ const companyRouter = require('./routes/companyRoutes/company.route');
 const truckRouter = require('./routes/companyRoutes/truckDetails.route');
 const allLoginRouter = require('./routes/login_route/all_Login.route');
 const categoryRouter = require('./routes/category_route/category.route');
+const tripRouter = require('./routes/singleOwner_route/trip.route');
 
 app.use('/6661accdbcc564c6dae76c7f', supplierRouter);
 app.use('/6661adf2bcc564c6dae76c83', singleOwnerRouter);

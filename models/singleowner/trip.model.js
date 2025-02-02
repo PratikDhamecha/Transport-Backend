@@ -31,6 +31,10 @@ const tripSchema = new Schema({
         type: String,
         required: false
     },
+    trip_shipperReciever:{
+        type: String,
+        required: false
+    }
 });
 tripSchema.index({starting_point:'2dsphere'});
 tripSchema.index({ending_point:'2dsphere'});
